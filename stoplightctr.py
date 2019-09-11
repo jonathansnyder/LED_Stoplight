@@ -3,7 +3,7 @@ stoplightctr = Flask(__name__)
 
 @stoplightctr.route("StoplightControler")
 def index():
-    return "Control the light!"
+    return render_template('controlerstyle.html',name=name)
 
 if __name__ == "__main__":
     stoplightctr.run()
