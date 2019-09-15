@@ -66,8 +66,8 @@ while(True){
     #Turn off Green, Turn on Yellow
     GPIO.output(GreenLed, GPIO.LOW)
     GPIO.output(YellowLed, GPIO.HIGH)
-    #Wait 10 Seconds
-    time.sleep(10)
+    #Wait 5 Seconds
+    time.sleep(5)
     #Turn off yellow
     GPIO.output(YellowLed, GPIO.LOW)
 
