@@ -8,12 +8,50 @@ GPIOControlLogic = Flask(__name__)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 
+#Name the pin numbers
+GreenLed = 11
+YellowLed = 13
+RedLed = 15
+
 #set the stoplight pins to output
-#pin
-GPIO.output( , GPIO.OUT)
+#pin green
+GPIO.output(GreenLed, GPIO.OUT)
 
-#pin
-GPIO.output( , GPIO.OUT)
+#pin yellow
+GPIO.output(YellowLed, GPIO.OUT)
 
-#pin
-GPIO.output( , GPIO.OUT)
+#pin red
+GPIO.output(RedLed, GPIO.OUT)
+
+#initialize all lights off
+GPIO.output(GreenLed, GPIO.LOW)
+GPIO.output(YellowLed, GPIO.LOW)
+GPIO.output(RedLed, GPIO.LOW)
+
+while(True){
+
+    if( #red light on){
+        GPIO.output(RedLed, GPIO.HIGH)
+        GPIO.output(YellowLed, GPIO.LOW)
+        GPIO.output(GreenLed, GPIO.LOW)
+    }
+    if( #yellow light on){
+        GPIO.output(RedLed, GPIO.LOW)
+        GPIO.output(YellowLed, GPIO.HIGH)
+        GPIO.output(GreenLed, GPIO.LOW)
+    }
+    if( #Green light on){
+        GPIO.output(RedLed, GPIO.LOW)
+        GPIO.output(YellowLed, GPIO.LOW)
+        GPIO.output(GreenLed, GPIO.HIGH)
+    }
+    if( #off){
+        GPIO.output(RedLed, GPIO.LOW)
+        GPIO.output(YellowLed, GPIO.LOW)
+        GPIO.output(GreenLed, GPIO.LOW)
+    }
+}
+
+while(True){
+
+    
