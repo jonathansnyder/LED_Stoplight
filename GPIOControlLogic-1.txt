@@ -1,0 +1,19 @@
+#imports rpi library and grabs neccessary parts from flask
+import RPI.GPIO as GPIO
+from flask import Flask
+
+GPIOControlLogic = Flask(__name__)
+
+#using the board numbers for pins not broadcom
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
+
+#set the stoplight pins to output
+#pin
+GPIO.output( , GPIO.OUT)
+
+#pin
+GPIO.output( , GPIO.OUT)
+
+#pin
+GPIO.output( , GPIO.OUT)
