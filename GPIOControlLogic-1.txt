@@ -54,4 +54,21 @@ while(True){
 
 while(True){
 
-    
+    #Turn on red
+    GPIO.output(RedLed, GPIO.HIGH)
+    #Wait 10 Seconds
+    time.sleep(10)
+    #Turn off Red, turn on Green
+    GPIO.output(RedLed, GPIO.LOW)
+    GPIO.output(GreenLed, GPIO.HIGH)
+    #Wait 10 Seconds
+    time.sleep(10)
+    #Turn off Green, Turn on Yellow
+    GPIO.output(GreenLed, GPIO.LOW)
+    GPIO.output(YellowLed, GPIO.HIGH)
+    #Wait 10 Seconds
+    time.sleep(10)
+    #Turn off yellow
+    GPIO.output(YellowLed, GPIO.LOW)
+
+}
