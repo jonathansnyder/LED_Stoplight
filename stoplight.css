@@ -1,0 +1,48 @@
+.ledbuttonRed {
+
+    background-color: #ba1313;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+
+}
+
+.ledbuttonYellow {
+
+    background-color: yellow;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+
+}
+
+.ledbuttonGreen {
+
+    background-color: green;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.ledbuttonOff {
+
+    background-color: lightgray;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.ledbutton {
+    
+    background-color: burlywood;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+
+}
+

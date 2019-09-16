@@ -6,9 +6,6 @@ stoplightctr = Flask(__name__)
 
 #imports rpi library and grabs neccessary parts from flask
 
-
-GPIOControlLogic = Flask(__name__)
-
 #using the board numbers for pins not broadcom
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
@@ -61,9 +58,7 @@ def action(option):
         GPIO.output(YellowLed, GPIO.LOW)
         GPIO.output(GreenLed, GPIO.LOW)
     if option == auto:
-
-
-
-
+        #run function
+    return render_template('index.html, **templatedata')
 if __name__ == "__main__":
     stoplightctr.run()
