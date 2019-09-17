@@ -40,34 +40,36 @@ def index():
 
 @stoplightctr.route("/<option>")
 def action(option):
+
     if option == 'Red':
         #only red light on
-        stop_thread = True
         GPIO.output(RedLed, GPIO.HIGH)
         GPIO.output(YellowLed, GPIO.LOW)
         GPIO.output(GreenLed, GPIO.LOW)
     if option == 'Yellow':
         #only yellow light on
-        stop_thread = True
+        
         GPIO.output(RedLed, GPIO.LOW)
         GPIO.output(YellowLed, GPIO.HIGH)
         GPIO.output(GreenLed, GPIO.LOW)
     if option == 'Green':
         #only green light on
-        stop_thread = True
+        
         GPIO.output(RedLed, GPIO.LOW)
         GPIO.output(YellowLed, GPIO.LOW)
         GPIO.output(GreenLed, GPIO.HIGH)
     if option == 'none':
         #all lights off
-        stop_thread = True
+        
         GPIO.output(RedLed, GPIO.LOW)
         GPIO.output(YellowLed, GPIO.LOW)
         GPIO.output(GreenLed, GPIO.LOW)
-    if option == 'auto':
-        #run function
-        stop_thread = False
-        def autostoplight():
+    
+    return render_template('index.html')
+@stoplightctr.route('/auto')
+def autoled():
+    stop_thread = False
+    def autostoplight():
             while True:
                 if stop_thread:
                     break
@@ -95,11 +97,10 @@ def action(option):
                     break
                 #Turn off yellow
                 GPIO.output(YellowLed, GPIO.LOW)
-        threadone = threading.Thread(target = autostoplight)
-        threadone.start()
-        threadone.join()
+    threadone = threading.Thread(target = autostoplight)
+    threadone.start()
+    threadone.join()
     return render_template('index.html')
-
 
 if __name__ == "__main__":
     stoplightctr.run(debug=True, port=80, host='0.0.0.0')
