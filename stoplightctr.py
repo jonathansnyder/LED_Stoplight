@@ -70,36 +70,33 @@ def action(option):
 def autoled():
     stop_thread = False
     def autostoplight():
-            while True:
-                if stop_thread:
-                    break
+            i = 0
+            while i <= 3:
+                
                 #Turn on red
                 GPIO.output(RedLed, GPIO.HIGH)
                 #Wait 10 Seconds
                 time.sleep(5)
-                if stop_thread:
-                    break
+                
                     
                 #Turn off Red, turn on Green
                 GPIO.output(RedLed, GPIO.LOW)
                 GPIO.output(GreenLed, GPIO.HIGH)
                 #Wait 10 Seconds
                 time.sleep(5)
-                if stop_thread:
-                    break
+                
                     
                 #Turn off Green, Turn on Yellow
                 GPIO.output(GreenLed, GPIO.LOW)
                 GPIO.output(YellowLed, GPIO.HIGH)
                 #Wait 5 Seconds
                 time.sleep(2)
-                if stop_thread:
-                    break
+                
                 #Turn off yellow
                 GPIO.output(YellowLed, GPIO.LOW)
-    threadone = threading.Thread(target = autostoplight)
-    threadone.start()
-    threadone.join()
+                i += 1
+
+
     return render_template('index.html')
 
 if __name__ == "__main__":
