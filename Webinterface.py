@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+<
 <head>
 
 </head>
+<link rel="stylesheet" href="../static/stoplight.css">
 <body>
 
     <a href="/Red" class="ledbuttonRed">Red Light</a>

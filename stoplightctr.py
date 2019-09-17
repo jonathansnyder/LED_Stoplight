@@ -1,5 +1,5 @@
-import RPI.GPIO as GPIO
-from flask import Flask, render_template
+import RPi.GPIO as GPIO
+from flask import Flask, render_template, request
 
 
 stoplightctr = Flask(__name__)
@@ -17,13 +17,13 @@ RedLed = 15
 
 #set the stoplight pins to output
 #pin green
-GPIO.output(GreenLed, GPIO.OUT)
+GPIO.setup(GreenLed, GPIO.OUT)
 
 #pin yellow
-GPIO.output(YellowLed, GPIO.OUT)
+GPIO.setup(YellowLed, GPIO.OUT)
 
 #pin red
-GPIO.output(RedLed, GPIO.OUT)
+GPIO.setup(RedLed, GPIO.OUT)
 
 #initialize all lights off
 GPIO.output(GreenLed, GPIO.LOW)
@@ -31,34 +31,37 @@ GPIO.output(YellowLed, GPIO.LOW)
 GPIO.output(RedLed, GPIO.LOW)
 
 
-@stoplightctr.route('/index')
+@stoplightctr.route('/')
 def index():
     return render_template('index.html')
 
 @stoplightctr.route("/<option>")
 def action(option):
-    if option == Red:
+    if option == 'Red':
         #only red light on
         GPIO.output(RedLed, GPIO.HIGH)
         GPIO.output(YellowLed, GPIO.LOW)
         GPIO.output(GreenLed, GPIO.LOW)
-    if option == Yellow:
+    if option == 'Yellow':
         #only yellow light on
         GPIO.output(RedLed, GPIO.LOW)
         GPIO.output(YellowLed, GPIO.HIGH)
         GPIO.output(GreenLed, GPIO.LOW)
-    if option == Green:
+    if option == 'Green':
         #only green light on
         GPIO.output(RedLed, GPIO.LOW)
         GPIO.output(YellowLed, GPIO.LOW)
         GPIO.output(GreenLed, GPIO.HIGH)
-    if option == none:
+    if option == 'none':
         #all lights off
         GPIO.output(RedLed, GPIO.LOW)
         GPIO.output(YellowLed, GPIO.LOW)
         GPIO.output(GreenLed, GPIO.LOW)
-    if option == auto:
+    if option == 'auto':
         #run function
-return render_template('index.html, **templatedata')
+        x = 1
+    return render_template('index.html')
+
+
 if __name__ == "__main__":
     stoplightctr.run(debug=True, port=80, host='0.0.0.0')
