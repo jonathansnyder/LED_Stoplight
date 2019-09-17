@@ -17,7 +17,6 @@ GreenLed = 11
 YellowLed = 13
 RedLed = 15
 
-stop_thread = False
 #set the stoplight pins to output
 #pin green
 GPIO.setup(GreenLed, GPIO.OUT)
@@ -68,7 +67,7 @@ def action(option):
     return render_template('index.html')
 @stoplightctr.route('/auto')
 def autoled():
-    stop_thread = False
+    
     def autostoplight():
             i = 0
             while i <= 3:
