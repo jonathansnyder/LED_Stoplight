@@ -1,4 +1,6 @@
 import RPi.GPIO as GPIO
+import threading
+import time
 from flask import Flask, render_template, request
 
 
@@ -15,6 +17,7 @@ GreenLed = 11
 YellowLed = 13
 RedLed = 15
 
+stop_thread = False
 #set the stoplight pins to output
 #pin green
 GPIO.setup(GreenLed, GPIO.OUT)
@@ -39,27 +42,62 @@ def index():
 def action(option):
     if option == 'Red':
         #only red light on
+        stop_thread = True
         GPIO.output(RedLed, GPIO.HIGH)
         GPIO.output(YellowLed, GPIO.LOW)
         GPIO.output(GreenLed, GPIO.LOW)
     if option == 'Yellow':
         #only yellow light on
+        stop_thread = True
         GPIO.output(RedLed, GPIO.LOW)
         GPIO.output(YellowLed, GPIO.HIGH)
         GPIO.output(GreenLed, GPIO.LOW)
     if option == 'Green':
         #only green light on
+        stop_thread = True
         GPIO.output(RedLed, GPIO.LOW)
         GPIO.output(YellowLed, GPIO.LOW)
         GPIO.output(GreenLed, GPIO.HIGH)
     if option == 'none':
         #all lights off
+        stop_thread = True
         GPIO.output(RedLed, GPIO.LOW)
         GPIO.output(YellowLed, GPIO.LOW)
         GPIO.output(GreenLed, GPIO.LOW)
     if option == 'auto':
         #run function
-        x = 1
+        stop_thread = False
+        def autostoplight():
+            while True:
+                if stop_thread:
+                    break
+                #Turn on red
+                GPIO.output(RedLed, GPIO.HIGH)
+                #Wait 10 Seconds
+                time.sleep(5)
+                if stop_thread:
+                    break
+                    
+                #Turn off Red, turn on Green
+                GPIO.output(RedLed, GPIO.LOW)
+                GPIO.output(GreenLed, GPIO.HIGH)
+                #Wait 10 Seconds
+                time.sleep(5)
+                if stop_thread:
+                    break
+                    
+                #Turn off Green, Turn on Yellow
+                GPIO.output(GreenLed, GPIO.LOW)
+                GPIO.output(YellowLed, GPIO.HIGH)
+                #Wait 5 Seconds
+                time.sleep(2)
+                if stop_thread:
+                    break
+                #Turn off yellow
+                GPIO.output(YellowLed, GPIO.LOW)
+        threadone = threading.Thread(target = autostoplight)
+        threadone.start()
+        threadone.join()
     return render_template('index.html')
 
 
