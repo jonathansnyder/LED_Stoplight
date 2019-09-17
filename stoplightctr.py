@@ -31,9 +31,9 @@ GPIO.output(YellowLed, GPIO.LOW)
 GPIO.output(RedLed, GPIO.LOW)
 
 
-@stoplightctr.route('/StoplightControler')
-def StoplightControler():
-    return render_template('StoplightControler.html')
+@stoplightctr.route('/index')
+def index():
+    return render_template('index.html')
 
 @stoplightctr.route("/<option>")
 def action(option):
@@ -59,6 +59,6 @@ def action(option):
         GPIO.output(GreenLed, GPIO.LOW)
     if option == auto:
         #run function
-    return render_template('index.html, **templatedata')
+return render_template('index.html, **templatedata')
 if __name__ == "__main__":
-    stoplightctr.run()
+    stoplightctr.run(debug=True, port=80, host='0.0.0.0')
